@@ -1,7 +1,6 @@
-package com.example.llovagn.t4r.Model
+package com.example.llovagn.t4r.model
 
 import com.example.llovagn.t4r.State
-import org.junit.Before
 import org.junit.Test
 
 import org.junit.Assert.*
