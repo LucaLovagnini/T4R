@@ -6,17 +6,21 @@ import com.example.llovagn.t4r.view.ViewMVC
 
 class PresenterImpl(val view: ViewMVC, val model: Model) : Presenter {
 
+    init {
+        view.setMainTextView(model.getModelState().getMessage())
+    }
+
     private fun updateView(state: State) {
         view.setMainTextView(state.getMessage())
     }
 
     override fun onClickBackground() {
-        val modelState = model.getModelNextState()
-        updateView(modelState)
+        val nextState = model.getModelNextState()
+        updateView(nextState)
     }
 
     override fun onClickPreviousButton() {
-        val modelState = model.getModelPreviousState()
-        updateView(modelState)
+        val previousState = model.getModelPreviousState()
+        updateView(previousState)
     }
 }
