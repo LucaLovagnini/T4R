@@ -7,11 +7,16 @@
     tools:context=".MainActivity">
 
     <!-- Put your complete original layout/view here -->
-    <View
+    <ImageView
         android:id="@+id/view_background"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:onClick="onTouchBackground" />
+        android:alpha="0.75"
+        android:onClick="onTouchBackground"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bojack"
+        android:tint="#6F000000"
+        android:visibility="visible" />
 
     <android.support.constraint.Guideline
         android:id="@+id/verticalGuidelineRight"
@@ -27,15 +32,14 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.20" />
 
-    <TextView
+    <TextSwitcher
         android:id="@+id/mainTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text=""
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuidelineRight"
         app:layout_constraintStart_toStartOf="@id/verticalGuidelineLeft"
