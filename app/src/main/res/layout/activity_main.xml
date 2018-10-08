@@ -10,17 +10,18 @@
         android:id="@+id/view_color_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blueSea"/>
+        android:background="@color/colorAccent"
+        android:onClick="onTouchBackground" />
 
     <!-- Put your complete original layout/view here -->
     <ImageSwitcher
         android:id="@+id/view_background"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
+        android:adjustViewBounds="true"
         android:alpha="0.3"
         android:onClick="onTouchBackground"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true" />
+        android:scaleType="centerCrop" />
 
     <android.support.constraint.Guideline
         android:id="@+id/verticalGuidelineRight"
@@ -58,13 +59,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_bordered_button"
+        android:contentDescription="Replay button to display previous state"
         android:onClick="onTouchPreviousThing"
         android:src="@drawable/ic_replay_black_72dp"
         app:layout_constraintBottom_toBottomOf="@+id/view_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainTextView"
-        app:layout_constraintVertical_bias="0.7"
-        android:contentDescription="Replay button to display previous state" />
+        app:layout_constraintVertical_bias="0.7" />
 
 </android.support.constraint.ConstraintLayout>

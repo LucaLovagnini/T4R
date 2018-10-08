@@ -1,12 +1,17 @@
 package com.example.llovagn.t4r
 
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
-import android.widget.*
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import android.widget.TextView
 import com.example.llovagn.t4r.model.CircularModel
 import com.example.llovagn.t4r.model.Model
 import com.example.llovagn.t4r.presenter.Presenter
@@ -16,20 +21,27 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.util.*
-import android.view.animation.AnimationUtils
-
 
 class MainActivity : AppCompatActivity(), ViewMVC {
 
     private lateinit var presenter: Presenter
     private var model: Model? = CircularModel(LinkedList<State>(Arrays.asList(
-            State("First"),
+            State("First", R.drawable.bojack),
             State("Second"),
             State("Third"),
             State("Fourth"),
             State("Fifth")
 
     )))
+
+    private val serialFileName = "model.ser"
+
+    private fun doesSerializableExist(): Boolean {
+        val context = applicationContext;
+        val file = context.getFileStreamPath(serialFileName)
+
+        return file == null || !file.exists()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +67,6 @@ class MainActivity : AppCompatActivity(), ViewMVC {
 
         view_background.setFactory {
             val imageView = ImageView(this@MainActivity)
-            imageView.setImageResource(R.drawable.blue)
             imageView.scaleType = ImageView.ScaleType.CENTER_CROP
             imageView
         }
@@ -77,7 +88,7 @@ class MainActivity : AppCompatActivity(), ViewMVC {
 
         val context = applicationContext;
 
-        val fos = context.openFileOutput("model.ser", Context.MODE_PRIVATE)
+        val fos = context.openFileOutput(serialFileName, Context.MODE_PRIVATE)
         val os = ObjectOutputStream(fos)
         os.writeObject(model)
         os.close()
@@ -86,14 +97,12 @@ class MainActivity : AppCompatActivity(), ViewMVC {
 
     override fun onResume() {
         super.onResume()
-        val context = applicationContext;
-        val file = context.getFileStreamPath("model.ser")
 
-        if (file == null || !file.exists()) {
+        if (doesSerializableExist()) {
             return
         }
 
-        val fis = context.openFileInput("model.ser")
+        val fis = applicationContext.openFileInput(serialFileName)
         val `is` = ObjectInputStream(fis)
         model = `is`.readObject() as Model
         presenter = PresenterImpl(this, model!!)
@@ -103,7 +112,12 @@ class MainActivity : AppCompatActivity(), ViewMVC {
     }
 
     override fun setBackgroundWithColor(androidColor: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val colorBackgroundDrawable = view_color_background.background as ColorDrawable
+        val colorFrom = colorBackgroundDrawable.color
+        val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, androidColor)
+        colorAnimation.duration = 2000 // milliseconds
+        colorAnimation.addUpdateListener { animator -> view_color_background.setBackgroundColor(animator.animatedValue as Int) }
+        colorAnimation.start()
     }
 
     override fun setBackgroundWithImage(image: Int) {
