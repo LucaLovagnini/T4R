@@ -2,12 +2,11 @@ package com.example.llovagn.t4r
 
 import android.content.Context
 import android.graphics.Color
-import android.media.Image
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
-import android.widget.TextView
+import android.widget.*
 import com.example.llovagn.t4r.model.CircularModel
 import com.example.llovagn.t4r.model.Model
 import com.example.llovagn.t4r.presenter.Presenter
@@ -17,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.util.*
+import android.view.animation.AnimationUtils
 
 
 class MainActivity : AppCompatActivity(), ViewMVC {
@@ -34,6 +34,16 @@ class MainActivity : AppCompatActivity(), ViewMVC {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val `in` = AnimationUtils.loadAnimation(this, R.anim.fadein)
+        val out = AnimationUtils.loadAnimation(this, R.anim.fadeout)
+
+        mainTextView.inAnimation = `in`
+        mainTextView.outAnimation = out
+
+        view_background.inAnimation = `in`
+        view_background.outAnimation = out
+
         mainTextView.setFactory {
             val textView = TextView(this@MainActivity)
             textView.textSize = 36f
@@ -43,9 +53,12 @@ class MainActivity : AppCompatActivity(), ViewMVC {
             textView
         }
 
-        mainTextView.setInAnimation(this, android.R.anim.fade_in);
-        mainTextView.setOutAnimation(this, android.R.anim.fade_out);
-
+        view_background.setFactory {
+            val imageView = ImageView(this@MainActivity)
+            imageView.setImageResource(R.drawable.blue)
+            imageView.scaleType = ImageView.ScaleType.CENTER_CROP
+            imageView
+        }
 
         if (savedInstanceState != null) {
             model = savedInstanceState.getParcelable("model")
@@ -93,8 +106,8 @@ class MainActivity : AppCompatActivity(), ViewMVC {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun setBackgroundWithImage(color: Image) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun setBackgroundWithImage(image: Int) {
+        view_background.setImageResource(image)
     }
 
     override fun setMainTextView(message: String) {

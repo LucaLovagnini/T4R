@@ -6,17 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <View
+        android:id="@+id/view_color_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blueSea"/>
+
     <!-- Put your complete original layout/view here -->
-    <ImageView
+    <ImageSwitcher
         android:id="@+id/view_background"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:alpha="0.75"
+        android:alpha="0.3"
         android:onClick="onTouchBackground"
         android:scaleType="centerCrop"
-        android:src="@drawable/bojack"
-        android:tint="#6F000000"
-        android:visibility="visible" />
+        android:adjustViewBounds="true" />
 
     <android.support.constraint.Guideline
         android:id="@+id/verticalGuidelineRight"

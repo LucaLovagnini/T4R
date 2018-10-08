@@ -7,7 +7,7 @@ interface ViewMVC {
 
     fun setMainTextView(message: String)
     fun setBackgroundWithColor(androidColor: Int)
-    fun setBackgroundWithImage(color: Image)
+    fun setBackgroundWithImage(image: Int)
     fun playSong(state: State)
 
 }
