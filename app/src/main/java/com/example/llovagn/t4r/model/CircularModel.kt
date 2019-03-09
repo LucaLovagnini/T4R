@@ -4,18 +4,17 @@ import android.graphics.Color
 import com.example.llovagn.t4r.State
 import java.util.*
 
-class CircularModel constructor(private var states: Deque<State>, private var repository: Repository<Deque<State>>) : Model{
+class CircularModel constructor(private var states: Deque<State>, private var repository: Repository<Deque<State>>) : Model {
 
     private val firstTimeMessage = "Welcome R"
     private val welcomeBackMessage = "Welcome Back, R"
 
     init {
         val loadedStates = repository.loadData()
-        if(loadedStates != null) {
+        if (loadedStates != null) {
             states = loadedStates
             states.addFirst(State(welcomeBackMessage, 0, Color.BLUE))
-        }
-        else
+        } else
             states.addFirst(State(firstTimeMessage, 0, Color.BLUE))
     }
 

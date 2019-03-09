@@ -7,9 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageSwitcher
-import android.widget.ImageView
 import android.widget.TextSwitcher
-import com.bumptech.glide.Glide
 import java.io.Serializable
 import java.util.*
 
@@ -21,23 +19,24 @@ private fun randomColor(): Int {
 }
 
 class State(private val stateMessage: String,
-                 private val backGroundImage: Int = 0,
-                 private var backGroundColor: Int? = null) : Serializable {
+            private val backGroundImage: Int = 0,
+            private var backGroundColor: Int? = null,
+            private var backGroundGif: Int = 0) : Serializable {
 
     init {
         if (backGroundImage != 0)
             backGroundColor = Color.BLACK
     }
 
-    fun execute(activity: Activity){
+    fun execute(activity: Activity) {
         setBackgroundWithColor(activity)
         setBackgroundWithImage(activity)
         setMainTextView(activity)
     }
 
     private fun setBackgroundWithColor(activity: Activity) {
-        val backgroundView= activity.findViewById<View>(R.id.view_color_background)
-        if(backGroundColor == null || backGroundColor == 0) backGroundColor = randomColor()
+        val backgroundView = activity.findViewById<View>(R.id.view_color_background)
+        if (backGroundColor == null || backGroundColor == 0) backGroundColor = randomColor()
         val colorBackgroundDrawable = backgroundView.background as ColorDrawable
         val colorFrom = colorBackgroundDrawable.color
         val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, backGroundColor)
@@ -48,14 +47,15 @@ class State(private val stateMessage: String,
 
 
     private fun setBackgroundWithImage(activity: Activity) {
-        val backgroundView= activity.findViewById<ImageSwitcher>(R.id.view_background)
+        val backgroundView = activity.findViewById<ImageSwitcher>(R.id.view_background)
         backgroundView.setImageResource(backGroundImage)
     }
 
-    private fun setMainTextView(activity : Activity) {
-        val mainTextView= activity.findViewById<TextSwitcher>(R.id.mainTextView)
+    private fun setMainTextView(activity: Activity) {
+        val mainTextView = activity.findViewById<TextSwitcher>(R.id.mainTextView)
         mainTextView.setText(stateMessage)
     }
+
     fun playSong(state: State) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

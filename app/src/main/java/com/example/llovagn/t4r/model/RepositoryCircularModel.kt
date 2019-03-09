@@ -1,14 +1,14 @@
 package com.example.llovagn.t4r.model
 
 import android.app.Activity
-import com.google.gson.Gson
 import android.content.Context
 import com.example.llovagn.t4r.State
+import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*
 
 
-class RepositoryCircularModel constructor( activity: Activity) : Repository<Deque<State>> {
+class RepositoryCircularModel constructor(activity: Activity) : Repository<Deque<State>> {
 
     private val storeFileName = "fileName"
     private val keyName = "keyName"
