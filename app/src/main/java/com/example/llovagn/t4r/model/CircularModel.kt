@@ -1,38 +1,40 @@
 package com.example.llovagn.t4r.model
 
 import android.graphics.Color
-import android.os.Parcelable
 import com.example.llovagn.t4r.State
-import kotlinx.android.parcel.IgnoredOnParcel
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 import java.util.*
 
-@Parcelize
-class CircularModel constructor(var states: @RawValue Deque<State>?) : Model, Parcelable {
+class CircularModel constructor(private var states: Deque<State>, private var repository: Repository<Deque<State>>) : Model{
 
-    @IgnoredOnParcel
     private val firstTimeMessage = "Welcome R"
+    private val welcomeBackMessage = "Welcome Back, R"
 
     init {
-        states!!.addFirst(
-                State(firstTimeMessage, 0, Color.BLUE)
-        )
+        val loadedStates = repository.loadData()
+        if(loadedStates != null) {
+            states = loadedStates
+            states.addFirst(State(welcomeBackMessage, 0, Color.BLUE))
+        }
+        else
+            states.addFirst(State(firstTimeMessage, 0, Color.BLUE))
     }
 
     override fun getModelState(): State {
-        return states!!.peekFirst()
+        return states.peekFirst()
     }
 
     override fun getModelNextState(): State {
-        val state = states!!.removeFirst()
-        if (state.getMessage() != firstTimeMessage) states!!.addLast(state)
+        val state = states.removeFirst()
+        if (state.getMessage() != firstTimeMessage && state.getMessage() != welcomeBackMessage)
+            states.addLast(state)
+        repository.saveData(states)
         return getModelState()
     }
 
     override fun getModelPreviousState(): State {
-        val state = states!!.removeLast()
-        states!!.addFirst(state)
+        val state = states.removeLast()
+        states.addFirst(state)
+        repository.saveData(states)
         return getModelState()
     }
 }
