@@ -63,8 +63,21 @@ class StateImpl(private val stateMessage: String,
         mainTextView.setText(stateMessage)
     }
 
-    override fun getMessage(): String {
-        return stateMessage
+    override fun equals(other: Any?): Boolean {
+        if (other !is StateImpl?)
+            return false
+        val otherState: StateImpl? = other
+        return this.stateMessage == otherState?.stateMessage &&
+                this.backGroundImage == otherState.backGroundImage &&
+                this.song == otherState.song
+    }
+
+    override fun hashCode(): Int {
+        var result = 17
+        result = 31 * result + stateMessage.hashCode()
+        result = 31 * result + backGroundImage.hashCode()
+        result = 31 * result + song.hashCode()
+        return result
     }
 
 }
