@@ -10,16 +10,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-
 public class MusicHandler {
-    private MediaPlayer mediaPlayer;
-    private Context context;
-    private int iVolume;
-
     private final static int INT_VOLUME_MAX = 100;
     private final static int INT_VOLUME_MIN = 0;
     private final static float FLOAT_VOLUME_MAX = 1;
     private final static float FLOAT_VOLUME_MIN = 0;
+    private MediaPlayer mediaPlayer;
+    private Context context;
+    private int iVolume;
 
     public MusicHandler(Context context) {
         this.context = context;
@@ -93,20 +91,17 @@ public class MusicHandler {
     }
 
     public void stopAndRelease(int fadeDuration) {
-        if(fadeDuration == 0){
+        if (fadeDuration == 0) {
             stopResetRelease();
             return;
         }
         try {
             final Timer timer = new Timer(true);
-            TimerTask timerTask = new TimerTask()
-            {
+            TimerTask timerTask = new TimerTask() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     updateVolume(-1);
-                    if (iVolume == INT_VOLUME_MIN)
-                    {
+                    if (iVolume == INT_VOLUME_MIN) {
                         // Stop and Release player after Pause music
                         stopResetRelease();
                         cancelAndPurgeTimer(timer);
@@ -124,13 +119,13 @@ public class MusicHandler {
         }
     }
 
-    private void stopResetRelease(){
+    private void stopResetRelease() {
         mediaPlayer.stop();
         mediaPlayer.reset();
         mediaPlayer.release();
     }
 
-    private void cancelAndPurgeTimer(Timer timer){
+    private void cancelAndPurgeTimer(Timer timer) {
         timer.cancel();
         timer.purge();
     }

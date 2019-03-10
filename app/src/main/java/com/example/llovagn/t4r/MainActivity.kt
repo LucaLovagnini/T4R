@@ -13,9 +13,11 @@ import com.example.llovagn.t4r.R.drawable.bojack
 import com.example.llovagn.t4r.R.drawable.chloeandmax
 import com.example.llovagn.t4r.model.CircularModel
 import com.example.llovagn.t4r.model.Model
-import com.example.llovagn.t4r.model.RepositoryCircularModel
 import com.example.llovagn.t4r.presenter.Presenter
 import com.example.llovagn.t4r.presenter.PresenterImpl
+import com.example.llovagn.t4r.repository.RepositoryStateImplCircularModel
+import com.example.llovagn.t4r.state.State
+import com.example.llovagn.t4r.state.StateImpl
 import com.example.llovagn.t4r.view.ViewInter
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.droidsonroids.gif.GifImageView
@@ -25,7 +27,7 @@ import java.util.*
 class MainActivity : AppCompatActivity(), ViewInter {
 
     private lateinit var presenter: Presenter
-    private var playingSong : MusicHandler? = null
+    private var playingSong: MusicHandler? = null
     private val fadeDuration = 2000
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,11 +35,11 @@ class MainActivity : AppCompatActivity(), ViewInter {
         setContentView(R.layout.activity_main)
 
         val states: Deque<State> = LinkedList<State>(Arrays.asList(
-                State("First", bojack),
-                State("Second", chloeandmax, R.raw.maxandchloe),
-                State("Third")))
+                StateImpl("First", bojack),
+                StateImpl("Second", chloeandmax, R.raw.maxandchloe),
+                StateImpl("Third")))
 
-        val repositoryCircularModel = RepositoryCircularModel(this)
+        val repositoryCircularModel = RepositoryStateImplCircularModel(this)
         val model: Model? = CircularModel(states,
                 repositoryCircularModel
         )
@@ -83,8 +85,8 @@ class MainActivity : AppCompatActivity(), ViewInter {
     }
 
     override fun playSong(song: Int) {
-        var newSong : MusicHandler? = null
-        if(song != 0) {
+        var newSong: MusicHandler? = null
+        if (song != 0) {
             newSong = MusicHandler(this)
             newSong.load(song, true)
             newSong.play(50)

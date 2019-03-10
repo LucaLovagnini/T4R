@@ -1,15 +1,15 @@
-package com.example.llovagn.t4r
+package com.example.llovagn.t4r.state
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.media.MediaPlayer
 import android.view.View
 import android.widget.ImageSwitcher
 import android.widget.TextSwitcher
-import java.io.Serializable
+import com.example.llovagn.t4r.MainActivity
+import com.example.llovagn.t4r.R
 import java.util.*
 
 private fun randomColor(): Int {
@@ -19,29 +19,29 @@ private fun randomColor(): Int {
     return random
 }
 
-class State(private val stateMessage: String,
-            private val backGroundImage: Int = 0,
-            private val song: Int = 0,
-            private var backGroundColor: Int? = null) : Serializable {
+class StateImpl(private val stateMessage: String,
+                private val backGroundImage: Int = 0,
+                private val song: Int = 0,
+                private var backGroundColor: Int? = null) : State {
 
     init {
         if (backGroundImage != 0)
             backGroundColor = Color.BLACK
     }
 
-    fun execute(activity: Activity) {
+    override fun execute(activity: Activity) {
         setBackgroundWithColor(activity)
         setBackgroundWithImage(activity)
         setMainTextView(activity)
         playSong(activity)
     }
 
-    private fun playSong(activity: Activity) {
-        val mainActivity : MainActivity = activity as MainActivity
+    override fun playSong(activity: Activity) {
+        val mainActivity: MainActivity = activity as MainActivity
         mainActivity.playSong(song)
     }
 
-    private fun setBackgroundWithColor(activity: Activity) {
+    override fun setBackgroundWithColor(activity: Activity) {
         val backgroundView = activity.findViewById<View>(R.id.view_color_background)
         if (backGroundColor == null || backGroundColor == 0) backGroundColor = randomColor()
         val colorBackgroundDrawable = backgroundView.background as ColorDrawable
@@ -53,17 +53,17 @@ class State(private val stateMessage: String,
     }
 
 
-    private fun setBackgroundWithImage(activity: Activity) {
+    override fun setBackgroundWithImage(activity: Activity) {
         val backgroundView = activity.findViewById<ImageSwitcher>(R.id.view_background)
         backgroundView.setImageResource(backGroundImage)
     }
 
-    private fun setMainTextView(activity: Activity) {
+    override fun setMainTextView(activity: Activity) {
         val mainTextView = activity.findViewById<TextSwitcher>(R.id.mainTextView)
         mainTextView.setText(stateMessage)
     }
 
-    fun getMessage(): String {
+    override fun getMessage(): String {
         return stateMessage
     }
 

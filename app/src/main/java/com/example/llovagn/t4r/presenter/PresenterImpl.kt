@@ -1,7 +1,7 @@
 package com.example.llovagn.t4r.presenter
 
-import com.example.llovagn.t4r.State
 import com.example.llovagn.t4r.model.Model
+import com.example.llovagn.t4r.state.State
 import com.example.llovagn.t4r.view.ViewInter
 
 class PresenterImpl(private val view: ViewInter, private val model: Model) : Presenter {
