@@ -25,6 +25,8 @@ import java.util.*
 class MainActivity : AppCompatActivity(), ViewInter {
 
     private lateinit var presenter: Presenter
+    private var playingSong : MusicHandler? = null
+    private val fadeDuration = 2000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity(), ViewInter {
 
         val states: Deque<State> = LinkedList<State>(Arrays.asList(
                 State("First", bojack),
-                State("Second", chloeandmax),
+                State("Second", chloeandmax, R.raw.maxandchloe),
                 State("Third")))
 
         val repositoryCircularModel = RepositoryCircularModel(this)
@@ -78,5 +80,23 @@ class MainActivity : AppCompatActivity(), ViewInter {
 
     override fun executeState(state: State) {
         state.execute(this)
+    }
+
+    override fun playSong(song: Int) {
+        var newSong : MusicHandler? = null
+        if(song != 0) {
+            newSong = MusicHandler(this)
+            newSong.load(song, true)
+            newSong.play(50)
+        }
+        playingSong?.stopAndRelease(fadeDuration)
+        playingSong = newSong
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //stopAndRelease(playingSong)
+        playingSong?.stopAndRelease(0)
     }
 }

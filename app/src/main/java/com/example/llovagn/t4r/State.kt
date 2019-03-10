@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.MediaPlayer
 import android.view.View
 import android.widget.ImageSwitcher
 import android.widget.TextSwitcher
@@ -20,8 +21,8 @@ private fun randomColor(): Int {
 
 class State(private val stateMessage: String,
             private val backGroundImage: Int = 0,
-            private var backGroundColor: Int? = null,
-            private var backGroundGif: Int = 0) : Serializable {
+            private val song: Int = 0,
+            private var backGroundColor: Int? = null) : Serializable {
 
     init {
         if (backGroundImage != 0)
@@ -32,6 +33,12 @@ class State(private val stateMessage: String,
         setBackgroundWithColor(activity)
         setBackgroundWithImage(activity)
         setMainTextView(activity)
+        playSong(activity)
+    }
+
+    private fun playSong(activity: Activity) {
+        val mainActivity : MainActivity = activity as MainActivity
+        mainActivity.playSong(song)
     }
 
     private fun setBackgroundWithColor(activity: Activity) {
@@ -54,10 +61,6 @@ class State(private val stateMessage: String,
     private fun setMainTextView(activity: Activity) {
         val mainTextView = activity.findViewById<TextSwitcher>(R.id.mainTextView)
         mainTextView.setText(stateMessage)
-    }
-
-    fun playSong(state: State) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     fun getMessage(): String {

@@ -5,5 +5,6 @@ import com.example.llovagn.t4r.State
 interface ViewInter {
 
     fun executeState(state: State)
+    fun playSong(song : Int)
 
 }

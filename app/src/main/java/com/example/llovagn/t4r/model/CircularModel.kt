@@ -13,9 +13,9 @@ class CircularModel constructor(private var states: Deque<State>, private var re
         val loadedStates = repository.loadData()
         if (loadedStates != null) {
             states = loadedStates
-            states.addFirst(State(welcomeBackMessage, 0, Color.BLUE))
+            states.addFirst(State(welcomeBackMessage, 0, 0, Color.BLUE))
         } else
-            states.addFirst(State(firstTimeMessage, 0, Color.BLUE))
+            states.addFirst(State(firstTimeMessage, 0, 0, Color.BLUE))
     }
 
     override fun getModelState(): State {
