@@ -1,8 +1,8 @@
-package com.example.llovagn.t4r
+package com.awesome.llovagn.t4r
 
 import android.widget.ImageSwitcher
 import android.widget.TextSwitcher
-import com.example.llovagn.t4r.state.StateImpl
+import com.awesome.llovagn.t4r.state.StateImpl
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test

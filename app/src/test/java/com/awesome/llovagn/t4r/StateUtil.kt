@@ -1,8 +1,8 @@
-package com.example.llovagn.t4r
+package com.awesome.llovagn.t4r
 
-import com.example.llovagn.t4r.state.State
-import com.example.llovagn.t4r.state.StateImpl
-import com.example.llovagn.t4r.util.sameStates
+import com.awesome.llovagn.t4r.state.State
+import com.awesome.llovagn.t4r.state.StateImpl
+import com.awesome.llovagn.t4r.util.sameStates
 import org.junit.Assert.assertFalse
 import org.junit.Test
 import java.util.*

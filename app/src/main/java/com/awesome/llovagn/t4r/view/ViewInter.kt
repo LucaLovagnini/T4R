@@ -1,6 +1,6 @@
-package com.example.llovagn.t4r.view
+package com.awesome.llovagn.t4r.view
 
-import com.example.llovagn.t4r.state.State
+import com.awesome.llovagn.t4r.state.State
 
 interface ViewInter {
 

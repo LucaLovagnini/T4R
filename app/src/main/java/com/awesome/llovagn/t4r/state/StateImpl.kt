@@ -1,4 +1,4 @@
-package com.example.llovagn.t4r.state
+package com.awesome.llovagn.t4r.state
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
@@ -8,8 +8,8 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageSwitcher
 import android.widget.TextSwitcher
-import com.example.llovagn.t4r.MainActivity
-import com.example.llovagn.t4r.R
+import com.awesome.llovagn.t4r.MainActivity
+import com.awesome.llovagn.t4r.R
 import java.util.*
 
 private fun randomColor(): Int {

@@ -1,9 +1,9 @@
-package com.example.llovagn.t4r.repository
+package com.awesome.llovagn.t4r.repository
 
 import android.app.Activity
 import android.content.Context
-import com.example.llovagn.t4r.state.State
-import com.example.llovagn.t4r.state.StateImpl
+import com.awesome.llovagn.t4r.state.State
+import com.awesome.llovagn.t4r.state.StateImpl
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.*

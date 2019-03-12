@@ -1,4 +1,4 @@
-package com.example.llovagn.t4r
+package com.awesome.llovagn.t4r
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

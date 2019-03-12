@@ -1,6 +1,6 @@
-package com.example.llovagn.t4r.util
+package com.awesome.llovagn.t4r.util
 
-import com.example.llovagn.t4r.state.State
+import com.awesome.llovagn.t4r.state.State
 import java.util.*
 
 fun sameStates(states: Iterable<State>, otherStates: Iterable<State>): Boolean {

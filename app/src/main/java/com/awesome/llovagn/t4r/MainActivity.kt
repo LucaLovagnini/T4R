@@ -1,4 +1,4 @@
-package com.example.llovagn.t4r
+package com.awesome.llovagn.t4r
 
 import android.graphics.Color
 import android.os.Bundle
@@ -9,16 +9,16 @@ import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.llovagn.t4r.R.drawable.*
-import com.example.llovagn.t4r.R.raw.flamenco
-import com.example.llovagn.t4r.model.CircularModel
-import com.example.llovagn.t4r.model.Model
-import com.example.llovagn.t4r.presenter.Presenter
-import com.example.llovagn.t4r.presenter.PresenterImpl
-import com.example.llovagn.t4r.repository.RepositoryStateImplCircularModel
-import com.example.llovagn.t4r.state.State
-import com.example.llovagn.t4r.state.StateImpl
-import com.example.llovagn.t4r.view.ViewInter
+import com.awesome.llovagn.t4r.R.drawable.*
+import com.awesome.llovagn.t4r.R.raw.flamenco
+import com.awesome.llovagn.t4r.model.CircularModel
+import com.awesome.llovagn.t4r.model.Model
+import com.awesome.llovagn.t4r.presenter.Presenter
+import com.awesome.llovagn.t4r.presenter.PresenterImpl
+import com.awesome.llovagn.t4r.repository.RepositoryStateImplCircularModel
+import com.awesome.llovagn.t4r.state.State
+import com.awesome.llovagn.t4r.state.StateImpl
+import com.awesome.llovagn.t4r.view.ViewInter
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.droidsonroids.gif.GifImageView
 import java.util.*
@@ -38,15 +38,15 @@ class MainActivity : AppCompatActivity(), ViewInter {
                 StateImpl("Life is Strange", chloeandmaxnew, R.raw.maxandchloe),
                 StateImpl("Aida", 0, R.raw.aida),
                 StateImpl("Fantasia", fantasia, R.raw.fantasia),
-                StateImpl("Tre Colli", 0, 0, Color.GREEN),
                 StateImpl("Cartoni Morti", cartonimorti, 0),
-                StateImpl("Tabacalera", 0, 0, Color.YELLOW),
+                StateImpl("Il Piccolo Principe", piccoloprincipe, 0, Color.YELLOW),
                 StateImpl("Surf Camp", tent, R.raw.rain),
                 StateImpl("Casa Patas", 0, flamenco, Color.RED),
                 StateImpl("Partner", partner),
                 StateImpl("Cloud Atlas", cloudatlas, R.raw.endtitle),
+                StateImpl("Tre Colli", 0, 0, Color.GREEN),
                 StateImpl("The Wolf", 0, R.raw.thewolf, Color.DKGRAY),
-                StateImpl("Live Aid", wembley, R.raw.wembley),
+                StateImpl("Queen\nLive Aid", wembley, R.raw.wembley),
                 StateImpl("Memola", 0, R.raw.forest, Color.GREEN),
                 StateImpl("Totoro", totoro, R.raw.totoro),
                 StateImpl("Silence", 0, 0, Color.BLACK)
@@ -111,7 +111,6 @@ class MainActivity : AppCompatActivity(), ViewInter {
 
     override fun onDestroy() {
         super.onDestroy()
-        //stopAndRelease(playingSong)
         playingSong?.stopAndRelease()
     }
 
@@ -122,6 +121,6 @@ class MainActivity : AppCompatActivity(), ViewInter {
 
     override fun onResume() {
         super.onResume()
-        playingSong!!.play()
+        playingSong?.play()
     }
 }

@@ -1,4 +1,4 @@
-package com.example.llovagn.t4r.state
+package com.awesome.llovagn.t4r.state
 
 import android.app.Activity
 

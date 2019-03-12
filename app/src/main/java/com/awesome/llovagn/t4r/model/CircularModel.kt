@@ -1,8 +1,8 @@
-package com.example.llovagn.t4r.model
+package com.awesome.llovagn.t4r.model
 
-import com.example.llovagn.t4r.repository.Repository
-import com.example.llovagn.t4r.state.State
-import com.example.llovagn.t4r.util.sameStates
+import com.awesome.llovagn.t4r.repository.Repository
+import com.awesome.llovagn.t4r.state.State
+import com.awesome.llovagn.t4r.util.sameStates
 import java.util.*
 
 class CircularModel constructor(private var states: Deque<State>, private var repository: Repository<Deque<State>>) : Model {
