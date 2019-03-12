@@ -9,8 +9,8 @@ import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.llovagn.t4r.R.drawable.bojack
-import com.example.llovagn.t4r.R.drawable.chloeandmax
+import com.example.llovagn.t4r.R.drawable.*
+import com.example.llovagn.t4r.R.raw.flamenco
 import com.example.llovagn.t4r.model.CircularModel
 import com.example.llovagn.t4r.model.Model
 import com.example.llovagn.t4r.presenter.Presenter
@@ -35,9 +35,22 @@ class MainActivity : AppCompatActivity(), ViewInter {
         setContentView(R.layout.activity_main)
 
         val states: Deque<State> = LinkedList<State>(Arrays.asList(
-                StateImpl("First", bojack),
-                StateImpl("Second", chloeandmax, R.raw.maxandchloe),
-                StateImpl("Third")))
+                StateImpl("Life is Strange", chloeandmaxnew, R.raw.maxandchloe),
+                StateImpl("Aida", 0, R.raw.aida),
+                StateImpl("Fantasia", fantasia, R.raw.fantasia),
+                StateImpl("Tre Colli", 0, 0, Color.GREEN),
+                StateImpl("Cartoni Morti", cartonimorti, 0),
+                StateImpl("Tabacalera", 0, 0, Color.YELLOW),
+                StateImpl("Surf Camp", tent, R.raw.rain),
+                StateImpl("Casa Patas", 0, flamenco, Color.RED),
+                StateImpl("Partner", partner),
+                StateImpl("Cloud Atlas", cloudatlas, R.raw.endtitle),
+                StateImpl("The Wolf", 0, R.raw.thewolf, Color.DKGRAY),
+                StateImpl("Live Aid", wembley, R.raw.wembley),
+                StateImpl("Memola", 0, R.raw.forest, Color.GREEN),
+                StateImpl("Totoro", totoro, R.raw.totoro),
+                StateImpl("Silence", 0, 0, Color.BLACK)
+        ))
 
         val repositoryCircularModel = RepositoryStateImplCircularModel(this)
         val model: Model? = CircularModel(states,
@@ -99,6 +112,16 @@ class MainActivity : AppCompatActivity(), ViewInter {
     override fun onDestroy() {
         super.onDestroy()
         //stopAndRelease(playingSong)
-        playingSong?.stopAndRelease(0)
+        playingSong?.stopAndRelease()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        playingSong?.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        playingSong!!.play()
     }
 }

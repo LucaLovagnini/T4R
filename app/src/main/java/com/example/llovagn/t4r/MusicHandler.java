@@ -92,7 +92,7 @@ public class MusicHandler {
 
     public void stopAndRelease(int fadeDuration) {
         if (fadeDuration == 0) {
-            stopResetRelease();
+            stopAndRelease();
             return;
         }
         try {
@@ -103,7 +103,7 @@ public class MusicHandler {
                     updateVolume(-1);
                     if (iVolume == INT_VOLUME_MIN) {
                         // Stop and Release player after Pause music
-                        stopResetRelease();
+                        stopAndRelease();
                         cancelAndPurgeTimer(timer);
                     }
                 }
@@ -119,10 +119,18 @@ public class MusicHandler {
         }
     }
 
-    private void stopResetRelease() {
+    public void stopAndRelease() {
         mediaPlayer.stop();
         mediaPlayer.reset();
         mediaPlayer.release();
+    }
+
+    public void pause() {
+        mediaPlayer.pause();
+    }
+
+    public void play() {
+        mediaPlayer.start();
     }
 
     private void cancelAndPurgeTimer(Timer timer) {
