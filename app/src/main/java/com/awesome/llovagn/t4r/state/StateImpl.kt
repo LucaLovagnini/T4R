@@ -8,7 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.ImageSwitcher
 import android.widget.TextSwitcher
-import com.awesome.llovagn.t4r.MainActivity
+import com.awesome.llovagn.t4r.view.MainActivity
 import com.awesome.llovagn.t4r.R
 import java.util.*
 

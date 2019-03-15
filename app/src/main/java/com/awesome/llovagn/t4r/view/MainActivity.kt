@@ -1,4 +1,4 @@
-package com.awesome.llovagn.t4r
+package com.awesome.llovagn.t4r.view
 
 import android.graphics.Color
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import com.awesome.llovagn.t4r.R
 import com.awesome.llovagn.t4r.R.drawable.*
 import com.awesome.llovagn.t4r.R.raw.flamenco
 import com.awesome.llovagn.t4r.model.CircularModel
@@ -18,7 +19,7 @@ import com.awesome.llovagn.t4r.presenter.PresenterImpl
 import com.awesome.llovagn.t4r.repository.RepositoryStateImplCircularModel
 import com.awesome.llovagn.t4r.state.State
 import com.awesome.llovagn.t4r.state.StateImpl
-import com.awesome.llovagn.t4r.view.ViewInter
+import com.awesome.llovagn.t4r.util.MusicHandler
 import kotlinx.android.synthetic.main.activity_main.*
 import pl.droidsonroids.gif.GifImageView
 import java.util.*
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity(), ViewInter {
             textView.textSize = 36f
             textView.gravity = Gravity.CENTER
             textView.setTextColor(Color.WHITE)
-            textView.setShadowLayer(30f, 0f, 0f, Color.GRAY);
+            textView.setShadowLayer(30f, 0f, 0f, Color.GRAY)
             textView
         }
 
