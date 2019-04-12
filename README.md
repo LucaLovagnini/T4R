@@ -13,7 +13,7 @@ There is no better way to describe what Things are than to show them:
 
 ![](T4Rdemo.gif)
 
-In T4R, Things can be a combination of any of:
+In T4R, Things can be any combination of:
 
 * Texts
 * Colors
