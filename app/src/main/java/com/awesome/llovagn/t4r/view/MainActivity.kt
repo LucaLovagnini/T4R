@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.awesome.llovagn.t4r.R
 import com.awesome.llovagn.t4r.R.drawable.*
-import com.awesome.llovagn.t4r.R.raw.flamenco
+import com.awesome.llovagn.t4r.R.raw.*
 import com.awesome.llovagn.t4r.model.CircularModel
 import com.awesome.llovagn.t4r.model.Model
 import com.awesome.llovagn.t4r.presenter.Presenter
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), ViewInter {
         val states: Deque<State> = LinkedList<State>(Arrays.asList(
                 StateImpl("Life is Strange", chloeandmaxnew, R.raw.maxandchloe),
                 StateImpl("Aida", 0, R.raw.aida),
-                StateImpl("Fantasia", fantasia, R.raw.fantasia),
+                StateImpl("Fantasia", fantasia, R.raw.fantasiasong),
                 StateImpl("Cartoni Morti", cartonimorti, 0),
                 StateImpl("Il Piccolo Principe", piccoloprincipe, 0, Color.YELLOW),
                 StateImpl("Surf Camp", tent, R.raw.rain),
@@ -47,10 +47,23 @@ class MainActivity : AppCompatActivity(), ViewInter {
                 StateImpl("Cloud Atlas", cloudatlas, R.raw.endtitle),
                 StateImpl("Tre Colli", 0, 0, Color.GREEN),
                 StateImpl("The Wolf", 0, R.raw.thewolf, Color.DKGRAY),
-                StateImpl("Queen\nLive Aid", wembley, R.raw.wembley),
+                StateImpl("Queen\nLive Aid", wembley, R.raw.wembleysound),
                 StateImpl("Memola", 0, R.raw.forest, Color.GREEN),
-                StateImpl("Totoro", totoro, R.raw.totoro),
-                StateImpl("Silence", 0, 0, Color.BLACK)
+                StateImpl("Totoro", totoro, R.raw.totorosong),
+                StateImpl("Silence", 0, 0, Color.BLACK),
+                StateImpl("Road to Bilbao", 0, R.raw.newslang, Color.argb(255, 0, 212, 232)),
+                StateImpl("Volterra", volterra),
+                StateImpl("#girodeilGiappone", girodeilgiappone),
+                StateImpl("Vivere la Vita", 0, R.raw.viverelavita),
+                StateImpl("Bojack", bojack),
+                StateImpl("Grotta Byron", wavesandseagull),
+                StateImpl("Spirited Away",spiritedaway),
+                StateImpl("Happy!", happy),
+                StateImpl("Peñalara", penalara),
+                StateImpl("Bimbi Sperduti",bimbisperduti),
+                StateImpl("La Stanza al Quarto Piano in Calle de la Cabeza"),
+                StateImpl("La La Land", lalaland, R.raw.lalalandpiano),
+                StateImpl("Cerro del\nTio Pio", cerrodeltiopio)
         ))
 
         val repositoryCircularModel = RepositoryStateImplCircularModel(this)
