@@ -1,0 +1,19 @@
+{
+  "name": "t4r",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "babel-eslint": "^10.0.1",
+    "prettier": "^1.17.1",
+    "react": "16.8.3",
+    "react-native": "0.59.8",
+    "react-native-fade-in-image": "^1.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.13.0"
+  }
+}
