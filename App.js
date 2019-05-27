@@ -6,22 +6,24 @@
  * @flow
  */
 
-import React, { Component } from "react";
-import FadeInView from "./FadeInView";
-import CenteredText from "./CenteredText";
+import React from "react";
+import Thing from "./Thing";
 import AsyncStorage from "@react-native-community/async-storage";
 import { timeoutPromise } from "./timeoutPromise";
+import { AppState } from "react-native";
+import SoundPlayer from "react-native-sound-player";
+import KeepAwake from "react-native-keep-awake";
 
-import { FlatList, Dimensions, Image, StyleSheet, View } from "react-native";
+import { FlatList, Dimensions, StyleSheet, View } from "react-native";
 
 const { width } = Dimensions.get("window");
 const INDEX_STORAGE = "index";
 
-export default class App extends Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialScrollIndex: null
+      currentIndex: null
     };
     this.viewabilityConfig = {
       waitForInteraction: true,
@@ -50,7 +52,11 @@ export default class App extends Component {
       console.log("Retrieved: " + value);
       if (value !== null && value !== "[object Undefined]") {
         this.setState({
-          initialScrollIndex: value
+          currentIndex: Number(value)
+        });
+      } else {
+        this.setState({
+          currentIndex: 0
         });
       }
     });
@@ -59,7 +65,7 @@ export default class App extends Component {
       // eslint-disable-next-line no-console
       console.log("Error while sotring state: " + error);
       this.setState({
-        initialScrollIndex: 0
+        currentIndex: 0
       });
     });
   };
@@ -67,20 +73,58 @@ export default class App extends Component {
   onViewableItemsChanged({ viewableItems }) {
     viewableItems.forEach(item => {
       const { isViewable, index } = item;
-      if (isViewable) this._storeIndex(index);
+      if (isViewable) {
+        this._storeIndex(index);
+        this.setState({ currentIndex: index });
+      }
     });
   }
 
   componentDidMount() {
+    AppState.addEventListener("change", this._handleAppStateChange);
     this._retrieveData();
   }
 
+  componentWillUnmount() {
+    AppState.removeEventListener("change", this._handleAppStateChange);
+  }
+
+  _handleAppStateChange = nextAppState => {
+    if (nextAppState !== "active") {
+      SoundPlayer.stop();
+    } else {
+      this.forceUpdate();
+    }
+  };
+
   render() {
-    if (this.state.initialScrollIndex === null) {
+    const data = [
+      { key: "1" },
+      { key: "2" },
+      { key: "3" },
+      { key: "4" },
+      { key: "5" },
+      { key: "6" },
+      { key: "7" },
+      { key: "8" },
+      { key: "9" },
+      { key: "10" },
+      { key: "11" },
+      { key: "12" },
+      { key: "13" },
+      { key: "14" },
+      { key: "15" },
+      { key: "16" },
+      { key: "17" },
+      { key: "18" }
+    ];
+
+    if (this.state.currentIndex === null) {
       return null;
     } else {
       return (
         <View style={{ flex: 1, backgroundColor: "black" }}>
+          <KeepAwake />
           <FlatList
             getItemLayout={(data, index) => ({
               length: width,
@@ -90,42 +134,21 @@ export default class App extends Component {
             onViewableItemsChanged={this.onViewableItemsChanged}
             viewabilityConfig={this.viewabilityConfig}
             showsHorizontalScrollIndicator={false}
-            initialScrollIndex={this.state.initialScrollIndex}
+            initialScrollIndex={this.state.currentIndex}
             pagingEnabled={true}
             horizontal={true}
             style={styles.flatList}
-            data={[
-              { key: "1" },
-              { key: "2" },
-              { key: "3" },
-              { key: "4" },
-              { key: "5" },
-              { key: "6" },
-              { key: "7" },
-              { key: "8" },
-              { key: "9" },
-              { key: "10" },
-              { key: "11" },
-              { key: "12" },
-              { key: "13" },
-              { key: "14" },
-              { key: "15" },
-              { key: "16" },
-              { key: "17" },
-              { key: "18" }
-            ]}
-            renderItem={({ item }) => (
-              <FadeInView>
-                <Image
-                  source={{
-                    uri:
-                      "https://media0.giphy.com/media/FVIkcKlhpGoSI/giphy.gif"
-                  }}
-                  style={styles.image}
+            data={data}
+            renderItem={item => {
+              const isDisplayed = this.state.currentIndex === item.index;
+              return (
+                <Thing
+                  sound="aida"
+                  text={item.index}
+                  isDisplayed={isDisplayed}
                 />
-                <CenteredText>{item.key}</CenteredText>
-              </FadeInView>
-            )}
+              );
+            }}
           />
         </View>
       );
@@ -134,11 +157,5 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-  text: { textAlign: "center" },
-  flatList: { flex: 1 },
-  image: {
-    width: "100%",
-    height: "100%",
-    opacity: 0.5
-  }
+  flatList: { flex: 1 }
 });
