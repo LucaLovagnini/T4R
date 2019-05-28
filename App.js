@@ -1,8 +1,4 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
  * @flow
  */
 
@@ -14,20 +10,21 @@ import { AppState } from "react-native";
 import SoundPlayer from "react-native-sound-player";
 import KeepAwake from "react-native-keep-awake";
 
+import type { ViewToken } from "ViewabilityHelper";
+
 import { FlatList, Dimensions, StyleSheet, View } from "react-native";
 
 const { width } = Dimensions.get("window");
 const INDEX_STORAGE = "index";
 
-export default class App extends React.Component {
-  constructor(props) {
+type State = { currentIndex: ?number };
+
+export default class App extends React.PureComponent<*, State> {
+  constructor(props: any) {
     super(props);
+
     this.state = {
       currentIndex: null
-    };
-    this.viewabilityConfig = {
-      waitForInteraction: true,
-      viewAreaCoveragePercentThreshold: 99
     };
     this.onViewableItemsChanged = this.onViewableItemsChanged.bind(this);
   }
@@ -35,8 +32,6 @@ export default class App extends React.Component {
   _storeIndex = async index => {
     try {
       await AsyncStorage.setItem(INDEX_STORAGE, String(index));
-      // eslint-disable-next-line no-console
-      console.log("Storing: " + index);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log("Error while sotring state: " + error);
@@ -48,8 +43,6 @@ export default class App extends React.Component {
     const promise = timeoutPromise(5000, AsyncStorage.getItem(INDEX_STORAGE));
 
     promise.then(value => {
-      // eslint-disable-next-line no-console
-      console.log("Retrieved: " + value);
       if (value !== null && value !== "[object Undefined]") {
         this.setState({
           currentIndex: Number(value)
@@ -70,7 +63,11 @@ export default class App extends React.Component {
     });
   };
 
-  onViewableItemsChanged({ viewableItems }) {
+  onViewableItemsChanged = ({
+    viewableItems
+  }: {
+    viewableItems: Array<ViewToken>
+  }) => {
     viewableItems.forEach(item => {
       const { isViewable, index } = item;
       if (isViewable) {
@@ -78,7 +75,7 @@ export default class App extends React.Component {
         this.setState({ currentIndex: index });
       }
     });
-  }
+  };
 
   componentDidMount() {
     AppState.addEventListener("change", this._handleAppStateChange);
@@ -132,7 +129,10 @@ export default class App extends React.Component {
               index
             })}
             onViewableItemsChanged={this.onViewableItemsChanged}
-            viewabilityConfig={this.viewabilityConfig}
+            viewabilityConfig={{
+              waitForInteraction: true,
+              viewAreaCoveragePercentThreshold: 99
+            }}
             showsHorizontalScrollIndicator={false}
             initialScrollIndex={this.state.currentIndex}
             pagingEnabled={true}
@@ -144,7 +144,7 @@ export default class App extends React.Component {
               return (
                 <Thing
                   sound="aida"
-                  text={item.index}
+                  text={String(item.index)}
                   isDisplayed={isDisplayed}
                 />
               );

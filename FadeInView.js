@@ -1,17 +1,26 @@
+/**
+ * @flow
+ */
+
 import React from "react";
 import { Animated, Dimensions } from "react-native";
 import PropTypes from "prop-types";
 
 type Props = {
   children: PropTypes.node.isRequired,
-  backgroundColor: string
+  backgroundColor: ?string
 };
 
 const { width } = Dimensions.get("window");
 
-export default class FadeInView extends React.PureComponent<Props> {
+export default class FadeInView extends React.PureComponent<Props, *> {
   state = {
     fadeAnim: new Animated.Value(0) // Initial value for opacity: 0
+  };
+
+  static defaultProps = {
+    children: null,
+    backgroundColor: null
   };
 
   componentDidMount() {
