@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  text: { color: "white", fontSize: 30, textAlign: "center" },
+  text: { color: "white", fontSize: 36, textAlign: "center" },
   flatList: { flex: 1 },
   image: {
     width: "100%",

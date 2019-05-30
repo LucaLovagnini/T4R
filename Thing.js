@@ -12,7 +12,7 @@ type Props = {
   isDisplayed: boolean,
   text: string,
   backgroundColor: ?string,
-  image: ?string,
+  image: ?number,
   sound: ?string
 };
 
@@ -66,7 +66,7 @@ export default class Thing extends React.PureComponent<Props, State> {
     if (!this.props.isDisplayed)
       return <View style={{ ...styles.fullScreen, background: "black" }} />;
 
-    if (this.props.isDisplayed && sound) {
+    if (sound) {
       try {
         SoundPlayer.playSoundFile(sound, "mp3");
       } catch (e) {
@@ -77,9 +77,7 @@ export default class Thing extends React.PureComponent<Props, State> {
 
     const background = this.props.image ? (
       <Image
-        source={{
-          uri: this.props.image
-        }}
+        source={this.props.image}
         style={[styles.fullScreen, { opacity: 0.5 }]}
       />
     ) : (

@@ -57,3 +57,6 @@ buck-out/
 
 ios/
 android/
+
+images/
+*.mp3
