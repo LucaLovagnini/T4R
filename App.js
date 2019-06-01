@@ -6,9 +6,8 @@ import React from "react";
 import Thing from "./Thing";
 import AsyncStorage from "@react-native-community/async-storage";
 import { timeoutPromise } from "./timeoutPromise";
-import { AppState } from "react-native";
 import KeepAwake from "react-native-keep-awake";
-import { Things } from "./Data";
+import Things from "./Data";
 
 import type { ViewToken } from "ViewabilityHelper";
 
@@ -78,19 +77,8 @@ export default class App extends React.PureComponent<*, State> {
   };
 
   componentDidMount() {
-    AppState.addEventListener("change", this._handleAppStateChange);
     this._retrieveData();
   }
-
-  componentWillUnmount() {
-    AppState.removeEventListener("change", this._handleAppStateChange);
-  }
-
-  _handleAppStateChange = nextAppState => {
-    if (nextAppState === "active") {
-      this.forceUpdate();
-    }
-  };
 
   render() {
     if (this.state.currentIndex === null) {

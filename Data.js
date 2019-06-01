@@ -90,7 +90,124 @@ const Things = [
     image: Images.lalaland,
     sound: "lalalandpiano"
   },
-  { key: "28", text: "Cerro del\nTio Pio", image: Images.cerrodeltiopio }
+  { key: "28", text: "Cerro del\nTio Pio", image: Images.cerrodeltiopio },
+  {
+    key: "30",
+    text: "One Punch Man",
+    image: Images.onepunchman
+  },
+  {
+    key: "31",
+    text: "Il Tavolo al Tramonto sul Sentiero per Monesteroli",
+    image: Images.monesteroli
+  },
+  {
+    key: "32",
+    text: "Oceano Mare",
+    image: Images.oceanomare
+  },
+  {
+    key: "33",
+    text: "Love Deaths and Robots",
+    image: Images.ldr
+  },
+  {
+    key: "34",
+    text: "Sdraiarsi sulle Mura di Lucca",
+    backgroundColor: "brown"
+  },
+  {
+    key: "35",
+    text: "Cantare le Canzoni della Disney",
+    image: Images.disney
+  },
+  {
+    key: "36",
+    text: "Daniel Sloss",
+    image: Images.danielsloss
+  },
+  {
+    key: "37",
+    text: "Guardia 82",
+    sound: "guardia82",
+    backgroundColor: "teal"
+  },
+  {
+    key: "38",
+    text: "Proiettore e Doctor Strange",
+    image: Images.doctorstrange
+  },
+  {
+    key: "39",
+    text: "Pearl",
+    sound: "pearl",
+    image: Images.pearl
+  },
+  {
+    key: "41",
+    text: "Pranzo al Ristorante Cubano",
+    backgroundColor: "orange"
+  },
+  {
+    key: "42",
+    text: "Il Vento Tra i Tuoi Capelli in Motorino",
+    image: Images.scooter
+  },
+  {
+    key: "43",
+    text: "Coso Nero nella Stanza del Coinquilino di Filippo",
+    backgroundColor: "black"
+  },
+  {
+    key: "44",
+    text: "Coso",
+    image: Images.peppino
+  },
+  {
+    key: "45",
+    text: "Sdraiarsi a Bordo Strada nei Campi a Pasquetta",
+    image: Images.easter
+  },
+  {
+    key: "46",
+    text: 'Ma tu lo hai mai visto "Lo Chiamavano Jeeg Robot"?',
+    backgroundColor: "orange"
+  },
+  {
+    key: "47",
+    text: "Goiko a Matadero",
+    image: Images.matadero
+  },
+  {
+    key: "40",
+    text: "Stare Seduti nella Doccia",
+    sound: "shower"
+  },
+  {
+    key: "48",
+    text: "Spritz Rubati",
+    image: Images.arginiemargini
+  },
+  {
+    key: "49",
+    text: "Guardare i Cartoni con Chiara",
+    backgroundColor: "deeppink"
+  },
+  {
+    key: "52",
+    text: "Le Dormite a Granada",
+    image: Images.granada
+  },
+  {
+    key: "50",
+    text: "Labadessa",
+    image: Images.labadessa
+  },
+  {
+    key: "51",
+    text: "La Tizianona Ubriaca",
+    image: Images.tiziana
+  }
 ];
 
-export { Things };
+export default Things;

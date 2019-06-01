@@ -71,6 +71,10 @@ export default class Thing extends React.PureComponent<Props, State> {
     }
   };
 
+  componentWillUnmount() {
+    AppState.removeEventListener("change", this._handleAppStateChange);
+  }
+
   render() {
     // If not displayed, render a black card.
     // Do not return null! Otherwise, only the displayed card will be rendered...
