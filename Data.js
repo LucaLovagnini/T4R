@@ -181,7 +181,8 @@ const Things = [
   {
     key: "40",
     text: "Stare Seduti nella Doccia",
-    sound: "shower"
+    sound: "shower",
+    backgroundColor: "mediumturquoise"
   },
   {
     key: "48",
