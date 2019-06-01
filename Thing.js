@@ -5,8 +5,8 @@
 import React from "react";
 import FadeInView from "./FadeInView";
 import CenteredText from "./CenteredText";
-import SoundPlayer from "react-native-sound-player";
-import { StyleSheet, Image, View, Dimensions } from "react-native";
+import { AppState, StyleSheet, Image, View, Dimensions } from "react-native";
+import Sound from "react-native-sound";
 
 type Props = {
   isDisplayed: boolean,
@@ -17,14 +17,14 @@ type Props = {
 };
 
 type State = {
-  loopListener: ?Function
+  soundPlayer: Sound
 };
 
 const { width } = Dimensions.get("window");
 
 export default class Thing extends React.PureComponent<Props, State> {
   state = {
-    loopListener: null
+    soundPlayer: null
   };
 
   static defaultProps = {
@@ -35,46 +35,52 @@ export default class Thing extends React.PureComponent<Props, State> {
     sound: null
   };
 
-  static getDerivedStateFromProps(nextProps: Props, prevState: *) {
+  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     if (
       nextProps.sound &&
       nextProps.isDisplayed &&
-      prevState.loopListener === null
-    )
+      prevState.soundPlayer === null
+    ) {
+      var soundPlayer = new Sound(nextProps.sound, Sound.MAIN_BUNDLE, error => {
+        if (error) {
+          // eslint-disable-next-line no-console
+          console.log("failed to load the sound", error);
+          return;
+        }
+        soundPlayer.play();
+        soundPlayer.setNumberOfLoops(-1);
+      });
       return {
-        loopListener: SoundPlayer.addEventListener(
-          "FinishedPlaying",
-          ({ success }) => {
-            if (success && nextProps.sound)
-              SoundPlayer.playSoundFile(nextProps.sound, "mp3");
-          }
-        )
+        soundPlayer: soundPlayer
       };
-    else if (!nextProps.isDisplayed && prevState.loopListener !== null) {
-      prevState.loopListener.remove();
-      return { loopListener: null };
+    } else if (!nextProps.isDisplayed && prevState.soundPlayer !== null) {
+      prevState.soundPlayer.stop();
+      prevState.soundPlayer.release();
+      return { soundPlayer: null };
     }
     return null;
   }
 
-  render() {
-    const { sound } = this.props;
+  _handleAppStateChange = nextAppState => {
+    if (this.state.soundPlayer !== null) {
+      if (nextAppState !== "active") {
+        this.state.soundPlayer.stop();
+      } else {
+        this.state.soundPlayer.play();
+      }
+    }
+  };
 
+  render() {
     // If not displayed, render a black card.
     // Do not return null! Otherwise, only the displayed card will be rendered...
     // ... but it will be placed as the first card (since its the only existing one!)
-    if (!this.props.isDisplayed)
+    if (!this.props.isDisplayed) {
+      AppState.removeEventListener("change", this._handleAppStateChange);
       return <View style={{ ...styles.fullScreen, background: "black" }} />;
-
-    if (sound) {
-      try {
-        SoundPlayer.playSoundFile(sound, "mp3");
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(`Cannot play the sound file ` + sound, e);
-      }
     }
 
+    AppState.addEventListener("change", this._handleAppStateChange);
     const background = this.props.image ? (
       <Image
         source={this.props.image}
