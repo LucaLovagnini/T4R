@@ -2,6 +2,7 @@
   "name": "t4r",
   "version": "0.0.1",
   "private": true,
+  "main": "src/index.js",
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
@@ -26,6 +27,7 @@
     "flow-bin": "^0.92.0",
     "prettier": "^1.17.1",
     "react-native-keep-awake": "^4.0.0",
-    "react-native-sound": "0.10.12"
+    "react-native-sound": "0.10.12",
+    "react-redux": "^7.1.0"
   }
 }
